@@ -61,7 +61,7 @@ All BigDecimal values always contain exactly two decimal places and use `HALF_RO
 
 DELETE /transactions
 
-This endpoint causes all existing transactions to be deleted
+This endpoint causes all existing transactions to be deleted.
 The endpoint should accept an empty request body and return a 204 status code.
 
 Requirements
