@@ -1,4 +1,4 @@
-# transaction-statistics
+# Realtime Transaction Statistics
 The main use case for the API is to calculate realtime statistics for the last 60 seconds of transactions.
 
 The API needs the following endpoints:
