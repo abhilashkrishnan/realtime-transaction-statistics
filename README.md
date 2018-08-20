@@ -70,7 +70,7 @@ For the Rest API, the most important and maybe most challenging requirement is t
 
 These are the additional requirements for the solution:
 
-    Free to choose any JVM language to complete the challenge in, but your application has to run in Maven.
+    Free to choose any JVM language to complete the challenge in, but the application has to be run in Maven.
 
     The API has to be threadsafe with concurrent requests.
 
