@@ -45,7 +45,7 @@ public class TransactionsController {
 	
 	/**
 	 * Delete transactions from the container
-	 * @return HTTP Status 200 on successful completion
+	 * @return HTTP Status 204 on successful completion
 	 */
 	@DeleteMapping("/transactions")
 	public ResponseEntity<?> deleteTransactions() {
