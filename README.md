@@ -1,6 +1,6 @@
 # Realtime Transaction Statistics
 
-## Coding challenge from the first Mobile Bank based out of Berlin, Germany.
+## Coding challenge from the world's first Mobile Bank based out of Berlin, Germany.
 
 The main use case for the API is to calculate realtime statistics for the last 60 seconds of transactions.
 
