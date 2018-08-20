@@ -80,5 +80,5 @@ These are the additional requirements for the solution:
 
     mvn clean install and mvn clean integration-test must complete successfully.
 
-    Please ensure that no changes are made to the src/it folder since we will run automated tests against your solution.
+    Please ensure that no changes are made to the src/it folder since automated tests will be run against the solution.
 
