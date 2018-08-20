@@ -1,4 +1,7 @@
 # Realtime Transaction Statistics
+
+## Programming challenge from the first Mobile Bank based out of Berlin, Germany.
+
 The main use case for the API is to calculate realtime statistics for the last 60 seconds of transactions.
 
 The API needs the following endpoints:
@@ -63,11 +66,11 @@ The endpoint should accept an empty request body and return a 204 status code.
 
 Requirements
 
-For the Rest API, the most important and maybe most challenging requirement is to make GET /statistics execute in constant time and memory. Note, however, that this is not the only requirement so it is strongly recommended that you tackle this last.
+For the Rest API, the most important and maybe most challenging requirement is to make GET /statistics execute in constant time and memory. Note, however, that this is not the only requirement so it is strongly recommended to tackle this last.
 
 These are the additional requirements for the solution:
 
-    You are free to choose any JVM language to complete the challenge in, but your application has to run in Maven.
+    Free to choose any JVM language to complete the challenge in, but your application has to run in Maven.
 
     The API has to be threadsafe with concurrent requests.
 
