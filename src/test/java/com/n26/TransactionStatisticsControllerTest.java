@@ -1,5 +1,6 @@
 package com.n26;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -8,8 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
-
-import static org.hamcrest.CoreMatchers.is;
+import java.util.stream.IntStream;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ import com.n26.entity.TransactionContainer;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class TransactionStatisticsControllerTest {
+public class TransactionStatisticsControllerTest extends TransactionTest {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -55,14 +55,35 @@ public class TransactionStatisticsControllerTest {
 	}
 	
 	@Test
+	public void multipleTransactionStatistics() throws Exception {
+		IntStream.range(0, 100).forEach(i -> {
+	        try {
+	        	Instant timestamp = Instant.now();
+	    		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
+	    		this.mockMvc.perform(post("/transactions").
+	    				contentType(MediaType.APPLICATION_JSON).
+	    				content(json)).andDo(print()).andExpect(status().isCreated());
+			} catch (Exception ex) {
+				throw new Error(ex);
+			}
+	    });
+		
+		this.mockMvc.perform(get("/statistics")
+		   		.accept(MediaType.APPLICATION_JSON))
+		   		.andExpect(status().isOk())
+		   		.andDo(print())
+		   		.andExpect(jsonPath("$.count", is(100))); 
+		
+	}
+	
+	@Test
 	public void statisticsNotEmpty() throws Exception {
 
 		Instant timestamp = Instant.now();
-		String json = createTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
-        
-        this.mockMvc.perform(post("/transactions")
-       		 .contentType(MediaType.APPLICATION_JSON)
-                .content(json));
+		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
+		this.mockMvc.perform(post("/transactions").
+				contentType(MediaType.APPLICATION_JSON).
+				content(json)).andDo(print()).andExpect(status().isCreated());
    	
 	   	this.mockMvc.perform(get("/statistics")
 	   		.accept(MediaType.APPLICATION_JSON))
@@ -71,7 +92,4 @@ public class TransactionStatisticsControllerTest {
 	   		.andExpect(jsonPath("$.count", is(1))); 
 	}
 	
-	protected String createTransactionJson(String timestamp){
-    	return String.format("{\"amount\": \"15.5\", \"timestamp\":  \"%s\"}", timestamp);
-	}
 }

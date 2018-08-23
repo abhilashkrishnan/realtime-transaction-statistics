@@ -40,4 +40,12 @@ public class TransactionStatistics {
 		this.min = DecimalUtils.round(new BigDecimal(Double.MAX_VALUE), 2);
 		this.count = 0;
 	}
+	
+	public void clear() {
+		this.sum = DecimalUtils.round(new BigDecimal(0.00), 2);
+		this.avg = DecimalUtils.round(new BigDecimal(0.00), 2);
+		this.max = DecimalUtils.round(new BigDecimal(0.00), 2);
+		this.min = DecimalUtils.round(new BigDecimal(0.00), 2);
+		this.count = 0;
+	}
 }

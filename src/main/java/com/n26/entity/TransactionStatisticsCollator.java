@@ -1,7 +1,7 @@
 package com.n26.entity;
 
 import java.math.BigDecimal;
-import java.time.ZoneId;
+import java.time.Instant;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -9,15 +9,18 @@ import com.n26.entity.model.Transaction;
 import com.n26.entity.model.TransactionStatistics;
 import com.n26.util.DecimalUtils;
 
-public class TransactionStatisticsAggregator {
+/**
+ * Placeholder for Transaction Statistics
+ */
+public class TransactionStatisticsCollator {
 
-	private ReadWriteLock lock;
+	private final ReadWriteLock lock;
 	private TransactionStatistics transactionStatistics;
 	private long timestamp;
 
-	public TransactionStatisticsAggregator() {
-		this.transactionStatistics = new TransactionStatistics();
+	public TransactionStatisticsCollator() {
 		this.lock = new ReentrantReadWriteLock();
+		this.transactionStatistics = new TransactionStatistics();
 	}
 
 	public ReadWriteLock getLock() {
@@ -26,7 +29,7 @@ public class TransactionStatisticsAggregator {
 
 	/**
 	 * Create a new transaction
-	 * @param New Transaction
+	 * @param New transaction
 	 */
 	public void createTransaction(Transaction transaction) {
 		this.transactionStatistics.setMax(DecimalUtils.round(transaction.getAmount(), 2));
@@ -34,11 +37,11 @@ public class TransactionStatisticsAggregator {
 		this.transactionStatistics.setSum(DecimalUtils.round(transaction.getAmount(), 2));
 		this.transactionStatistics.setAvg(DecimalUtils.round(transaction.getAmount(), 2));
 		this.transactionStatistics.setCount(1);
-		this.timestamp = transaction.getTimestamp().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+		this.timestamp = Instant.parse(transaction.getTimestamp()).toEpochMilli();
 	}
 
 	/**
-	 * Merge transaction to the aggregator if transaction index is already occupied
+	 * Merge transaction to the collator if transaction index is already occupied
 	 * with existing transaction(s) since timestamp is same for the transactions at
 	 * this index
 	 * @param Transaction to be merged
@@ -57,7 +60,8 @@ public class TransactionStatisticsAggregator {
 	}
 
 	/**
-	 * Fetch the transaction statistics and merge to the final result
+	 * Fetch the transaction statistics and merge to the final result. 
+	 * Thread-safe operation for concurrent reads.
 	 * @param TransactionStatistics result to the merged
 	 */
 	public void mergeToResult(TransactionStatistics result) {

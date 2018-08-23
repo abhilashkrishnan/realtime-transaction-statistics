@@ -1,7 +1,6 @@
 package com.n26.service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,7 @@ import com.n26.entity.TransactionContainer;
 import com.n26.entity.model.Transaction;
 
 @Service
-public class TransactionsServiceImpl implements TransactionsService {
+public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	private TransactionContainer transactionContainer; 
@@ -21,7 +20,7 @@ public class TransactionsServiceImpl implements TransactionsService {
 	 */
 	@Override
 	public void addTransaction(Transaction transaction) {
-		long currentTimestamp = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+		long currentTimestamp = Instant.now().toEpochMilli();
 		transactionContainer.addTransaction(transaction, currentTimestamp);
 	}
 

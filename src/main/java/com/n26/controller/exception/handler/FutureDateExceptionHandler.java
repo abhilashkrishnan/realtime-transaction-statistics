@@ -11,9 +11,14 @@ import com.n26.controller.exception.FutureDateException;
 @ControllerAdvice
 @RestController
 public class FutureDateExceptionHandler {
-
+	
+	/**
+	 * Exception Handler for transaction in future date.
+	 * @return HTTP Status 422
+	 */
 	@ExceptionHandler(FutureDateException.class)
 	protected ResponseEntity<Object> handleFutureDate() {
+		System.out.println(">>>>>>>>>>>>>>>>>>> Future...");
 		return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 }

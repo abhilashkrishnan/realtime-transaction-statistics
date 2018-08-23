@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class TransactionsControllerTest {
+public class TransactionControllerTest extends TransactionTest {
 	
 	@Autowired
 	private WebApplicationContext wac;
@@ -35,28 +35,48 @@ public class TransactionsControllerTest {
 	}
 	
 	@Test
-	public void testInvalidTimestamp() throws Exception {
-		Instant timestamp = Instant.now().plusMillis(-60000);
-		String json = createTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
-		System.out.println("Json: " + json);
+	public void transactionWithOlderTimestamp() throws Exception {
+		
+		Instant timestamp = Instant.now().minusMillis(80000); 
+		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
 				content(json)).andDo(print()).andExpect(status().isNoContent());
-		
 	}
 	
 	@Test
-	public void testValidTimestamp() throws Exception {
+	public void transactionWithValidTimestamp() throws Exception {
 		Instant timestamp = Instant.now();
-		String json = createTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
-		System.out.println("Json: " + json);
+		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
 				content(json)).andDo(print()).andExpect(status().isCreated());
 	}
 	
-	protected String createTransactionJson(String timestamp){
-    	return String.format("{\"amount\": \"15.5\", \"timestamp\":  \"%s\"}", timestamp);
+	@Test
+	public void transactionWithFutureTimestamp() throws Exception {
+		
+		Instant timestamp = Instant.now().plusMillis(80000);
+		
+		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
+		this.mockMvc.perform(post("/transactions").
+				contentType(MediaType.APPLICATION_JSON).
+				content(json)).andDo(print()).andExpect(status().isUnprocessableEntity());
+	}
+
+	@Test
+	public void transactionWithInvalidJson() throws Exception {
+		Instant timestamp = Instant.now();
+		String json = createInvalidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
+		this.mockMvc.perform(post("/transactions").
+				contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isBadRequest());
 	}
 	
+	@Test
+	public void transactionWithUnparsableJson() throws Exception {
+		Instant timestamp = Instant.now();
+		String json = createUnparsableTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
+		this.mockMvc.perform(post("/transactions").
+				contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isUnprocessableEntity());
+	}
 }

@@ -6,14 +6,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.n26.controller.exception.TimestampParseException;
 
 @ControllerAdvice
 @RestController
-public class TypeMismatchExceptionHandler {
-
-	@ExceptionHandler(InvalidFormatException.class)
-	protected ResponseEntity<Object> handleTypeMismatch() {
-		return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
+public class TimestampParseExceptionHandler {
+	
+	/**
+	 * Exception handler for date time parsing
+	 * @return HTTP Status 422
+	 */
+	@ExceptionHandler(TimestampParseException.class)
+	public ResponseEntity<?> handleParseError() {
+		return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 }

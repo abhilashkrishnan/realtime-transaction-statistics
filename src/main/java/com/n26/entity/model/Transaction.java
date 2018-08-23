@@ -1,7 +1,6 @@
 package com.n26.entity.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +24,6 @@ public class Transaction {
 	
 	@JsonProperty("timestamp")
 	@NotNull
-	private LocalDateTime timestamp;
+	private String timestamp;
 	
 }

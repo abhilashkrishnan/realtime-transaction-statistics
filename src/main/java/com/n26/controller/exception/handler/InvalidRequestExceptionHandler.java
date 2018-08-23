@@ -24,29 +24,6 @@ public class InvalidRequestExceptionHandler extends ResponseEntityExceptionHandl
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
-	/*@Override
-	protected ResponseEntity<Object> handleConversionNotSupported(ConversionNotSupportedException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
-	*/
-	/*@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
-		
-		return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-	}
-	
-	@Override
-	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
-			HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
-		
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}*/
-	
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {

@@ -12,6 +12,10 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 @RestController
 public class InvalidFormatExceptionHandler {
 	
+	/**
+	 * Exception handler for invalid JSON request format 
+	 * @return HTTP Status 422
+	 */
 	@ExceptionHandler(InvalidFormatException.class)
 	protected ResponseEntity<Object> handleRequestInvalidFormat() {
 		return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);

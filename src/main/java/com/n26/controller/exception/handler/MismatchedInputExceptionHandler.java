@@ -11,6 +11,11 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 @ControllerAdvice
 @RestController
 public class MismatchedInputExceptionHandler {
+	
+	/**
+	 * Exception handler for JSON type mismatch
+	 * @return HTTP Status 400
+	 */
 	@ExceptionHandler(MismatchedInputException.class)
 	protected ResponseEntity<Object> handleTypeMismatch() {
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);

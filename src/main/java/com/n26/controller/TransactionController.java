@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.n26.controller.validator.TransactionValidator;
 import com.n26.entity.model.Transaction;
-import com.n26.entity.model.validator.TransactionValidator;
-import com.n26.service.TransactionsService;
+import com.n26.service.TransactionService;
 
 @RestController
-public class TransactionsController {
+public class TransactionController {
 	
 	/**
-	 * Maximum time to keep the transaction entries
+	 * Maximum time to keep the transaction entries which is 60000 ms (60 secs)
 	 */
 	@Value("${time.mills.max}")
 	private int maxTimeMillsToKeep;
 	
 	@Autowired
-	private TransactionsService transactionsService;
+	private TransactionService transactionsService;
 	
 	@Autowired
 	private TransactionValidator transactionValidator;

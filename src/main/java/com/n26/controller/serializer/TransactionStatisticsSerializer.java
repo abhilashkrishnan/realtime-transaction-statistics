@@ -13,7 +13,7 @@ import com.n26.entity.model.TransactionStatistics;
 public class TransactionStatisticsSerializer extends JsonSerializer<TransactionStatistics> {
 	
 	/**
-	 * Serialize Transaction object to JSON string in response to /statistics GET request
+	 * Serialize Transaction object to JSON string for response to /statistics GET request
 	 * @param TransactionStatistics object
 	 * @param Json string generator
 	 * @param provider
