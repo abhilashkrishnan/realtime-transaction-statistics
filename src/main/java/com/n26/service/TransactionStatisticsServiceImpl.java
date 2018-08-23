@@ -22,7 +22,7 @@ public class TransactionStatisticsServiceImpl implements TransactionStatisticsSe
 	 */
 	@Override
 	public TransactionStatistics getTransactionStatistics() {
-		List<TransactionStatisticsCollator> transactionStatisticsCollator = getTransactionStatisticsCollator();
+		List<TransactionStatisticsCollator> transactionStatisticsCollator = getTransactionStatisticsCollators();
 		
 		TransactionStatistics transactionStatistics = new TransactionStatistics();
 		
@@ -37,11 +37,11 @@ public class TransactionStatisticsServiceImpl implements TransactionStatisticsSe
 	
 	/**
 	 * Retrieve the valid transaction statistics collator
-	 * @return List of valid transaction statistics collator
+	 * @return List of valid transaction statistics collators
 	 */
-	private List<TransactionStatisticsCollator> getTransactionStatisticsCollator() {
+	private List<TransactionStatisticsCollator> getTransactionStatisticsCollators() {
 		long currentTimestamp = Instant.now().toEpochMilli();
-		return transactionContainer.getValidTransactionStatisticsCollator(currentTimestamp);
+		return transactionContainer.getValidTransactionStatisticsCollators(currentTimestamp);
 	}
 
 }

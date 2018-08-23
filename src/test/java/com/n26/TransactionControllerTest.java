@@ -1,7 +1,6 @@
 package com.n26;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.Instant;
@@ -41,7 +40,7 @@ public class TransactionControllerTest extends TransactionTest {
 		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
-				content(json)).andDo(print()).andExpect(status().isNoContent());
+				content(json)).andExpect(status().isNoContent());
 	}
 	
 	@Test
@@ -50,7 +49,7 @@ public class TransactionControllerTest extends TransactionTest {
 		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
-				content(json)).andDo(print()).andExpect(status().isCreated());
+				content(json)).andExpect(status().isCreated());
 	}
 	
 	@Test
@@ -61,7 +60,7 @@ public class TransactionControllerTest extends TransactionTest {
 		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
-				content(json)).andDo(print()).andExpect(status().isUnprocessableEntity());
+				content(json)).andExpect(status().isUnprocessableEntity());
 	}
 
 	@Test

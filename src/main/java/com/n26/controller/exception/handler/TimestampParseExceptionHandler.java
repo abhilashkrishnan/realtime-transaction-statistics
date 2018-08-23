@@ -13,11 +13,11 @@ import com.n26.controller.exception.TimestampParseException;
 public class TimestampParseExceptionHandler {
 	
 	/**
-	 * Exception handler for date time parsing
+	 * Exception handler for timestamp parsing errors
 	 * @return HTTP Status 422
 	 */
 	@ExceptionHandler(TimestampParseException.class)
-	public ResponseEntity<?> handleParseError() {
-		return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+	public ResponseEntity<Object> handleParseError() {
+		return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 }

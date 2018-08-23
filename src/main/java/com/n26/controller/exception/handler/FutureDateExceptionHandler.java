@@ -18,7 +18,6 @@ public class FutureDateExceptionHandler {
 	 */
 	@ExceptionHandler(FutureDateException.class)
 	protected ResponseEntity<Object> handleFutureDate() {
-		System.out.println(">>>>>>>>>>>>>>>>>>> Future...");
 		return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 }

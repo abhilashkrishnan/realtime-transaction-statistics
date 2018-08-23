@@ -51,7 +51,7 @@ public class TransactionServiceTest extends TransactionTest  {
 		transactionService.addTransaction(transaction);
 		
 		long timestamp = Instant.now().toEpochMilli();
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertEquals(1, collators.size());
 		TransactionStatisticsCollator collator = collators.get(0);
@@ -87,7 +87,7 @@ public class TransactionServiceTest extends TransactionTest  {
 			//Eat me
 		}
 		
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertNotNull(collators);
 		
@@ -126,7 +126,7 @@ public class TransactionServiceTest extends TransactionTest  {
 		transactionService.deleteTransactions();
 		
 		long now = Instant.now().toEpochMilli();
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(now);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(now);
 		
 		assertEquals(0, collators.size());
 	}

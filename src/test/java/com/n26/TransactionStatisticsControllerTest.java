@@ -49,7 +49,6 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 		this.mockMvc.perform(get("/statistics").
 				accept(MediaType.APPLICATION_JSON)).
 				andExpect(status().isOk()).
-				andDo(print()).
 				andExpect(jsonPath("$.count", is(0)));
 				
 	}
@@ -62,7 +61,7 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 	    		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 	    		this.mockMvc.perform(post("/transactions").
 	    				contentType(MediaType.APPLICATION_JSON).
-	    				content(json)).andDo(print()).andExpect(status().isCreated());
+	    				content(json)).andExpect(status().isCreated());
 			} catch (Exception ex) {
 				throw new Error(ex);
 			}
@@ -83,7 +82,7 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));
 		this.mockMvc.perform(post("/transactions").
 				contentType(MediaType.APPLICATION_JSON).
-				content(json)).andDo(print()).andExpect(status().isCreated());
+				content(json)).andExpect(status().isCreated());
    	
 	   	this.mockMvc.perform(get("/statistics")
 	   		.accept(MediaType.APPLICATION_JSON))

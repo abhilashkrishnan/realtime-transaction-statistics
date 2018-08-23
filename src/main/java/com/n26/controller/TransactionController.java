@@ -29,6 +29,9 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionsService;
 	
+	/**
+	 * Transaction validator for Older and Future timestamps.
+	 */
 	@Autowired
 	private TransactionValidator transactionValidator;
 	
@@ -38,7 +41,7 @@ public class TransactionController {
 	 * @return HTTP Status 201 on successful creation of transaction
 	 */
 	@PostMapping("/transactions")
-	public ResponseEntity<?> addTransaction(@RequestBody(required = true) @Valid Transaction transaction) {
+	public ResponseEntity<?> addTransaction(@RequestBody @Valid Transaction transaction) {
 		transactionsService.addTransaction(transaction);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

@@ -16,11 +16,9 @@ import lombok.ToString;
 @ToString
 public class Transaction {
 	
-	
 	@JsonProperty("amount")
 	@NotNull
 	private BigDecimal amount;
-	
 	
 	@JsonProperty("timestamp")
 	@NotNull

@@ -48,7 +48,7 @@ public class TransactionContainerTest {
 		transactionContainer.addTransaction(transaction, timestamp);
 		
 		timestamp = Instant.now().toEpochMilli();
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertEquals(1, collators.size());
 		TransactionStatisticsCollator collator = collators.get(0);
@@ -83,7 +83,7 @@ public class TransactionContainerTest {
 			//Eat me
 		}
 		
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertNotNull(collators);
 		
@@ -106,7 +106,7 @@ public class TransactionContainerTest {
 		transactionContainer.addTransaction(transaction, timestamp);
 		
 		timestamp = Instant.now().toEpochMilli();
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertEquals(1, collators.size());
 		
@@ -132,7 +132,7 @@ public class TransactionContainerTest {
 		transactionContainer.addTransaction(transaction, timestamp);
 		
 		timestamp = Instant.now().toEpochMilli();
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertEquals(1, collators.size());
 		
@@ -173,7 +173,7 @@ public class TransactionContainerTest {
 			//Eat me
 		}
 		
-		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertNotNull(collators);
 		
@@ -186,7 +186,7 @@ public class TransactionContainerTest {
 		
 		transactionContainer.clear();
 		
-		collators = transactionContainer.getValidTransactionStatisticsCollator(timestamp);
+		collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		total = 0;
 		

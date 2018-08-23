@@ -61,19 +61,26 @@ public class TransactionContainerImpl implements TransactionContainer {
 	 * Add Transaction to the container
 	 * 
 	 * @param Transaction to be added
-	 * @param Current timestamp to verify whether transaction is within time constraints
+	 * @param Current timestamp for verifying whether transaction is within time constraints
 	 */
 	@Override
 	public void addTransaction(Transaction transaction, long currentTimestamp) {
 		this.collate(transaction, currentTimestamp);
 	}
 
+	/**
+	 * Retrieve valid transaction collators
+	 * @param Current timestamp
+	 */
 	@Override
-	public List<TransactionStatisticsCollator> getValidTransactionStatisticsCollator(long currentTimestamp) {
+	public List<TransactionStatisticsCollator> getValidTransactionStatisticsCollators(long currentTimestamp) {
 		return Arrays.stream(this.transactionStatisticsCollator)
 				.filter(t -> isValidTransaction(t.getTimestamp(), currentTimestamp)).collect(Collectors.toList());
 	}
 
+	/**
+	 * Reinitialize the collator array
+	 */
 	@Override
 	public void clear() {
 		this.initCollator();
@@ -128,6 +135,12 @@ public class TransactionContainerImpl implements TransactionContainer {
 		return index;
 	}
 
+	/**
+	 * Verify whether the transaction is valid
+	 * @param Transaction timestamp 
+	 * @param Current timestamp
+	 * @return Is valid
+	 */
 	private boolean isValidTransaction(long txnTimestamp, long currentTimestamp) {
 		return txnTimestamp >= (currentTimestamp - maxTimeMillsToKeep);
 	}

@@ -20,35 +20,30 @@ public class InvalidRequestExceptionHandler extends ResponseEntityExceptionHandl
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
 		return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ex.printStackTrace();
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 	}
 	
