@@ -102,13 +102,11 @@ public class TransactionContainerImpl implements TransactionContainer {
 
 			if (txnStatisticsCollator.isEmpty())
 				txnStatisticsCollator.createTransaction(transaction);
-			else {
-				if (isValidTransaction(txnStatisticsCollator.getTimestamp(), currentTimestamp))
+			else if (isValidTransaction(txnStatisticsCollator.getTimestamp(), currentTimestamp)) 
 					txnStatisticsCollator.merge(transaction);
-				else {
-					txnStatisticsCollator.reset();
-					txnStatisticsCollator.createTransaction(transaction);
-				}
+			else {
+				txnStatisticsCollator.reset();
+				txnStatisticsCollator.createTransaction(transaction);
 			}
 
 		} finally {

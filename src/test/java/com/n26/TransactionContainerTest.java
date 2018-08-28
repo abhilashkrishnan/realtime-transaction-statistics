@@ -77,12 +77,6 @@ public class TransactionContainerTest {
 			executor.shutdown();
 		}
 		
-		try {
-			Thread.sleep(2000); 
-		} catch (InterruptedException e) {
-			//Eat me
-		}
-		
 		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertNotNull(collators);
@@ -96,7 +90,7 @@ public class TransactionContainerTest {
 	}
 	
 	@Test
-	public void getValidTransactionStatisticsCollator() {
+	public void getValidTransactionStatistics() {
 		
 		Instant now = Instant.now();
 		long timestamp = Instant.now().toEpochMilli();
@@ -122,7 +116,7 @@ public class TransactionContainerTest {
 	}
 	
 	@Test
-	public void collate() {
+	public void collateTransactionStatistics() {
 		
 		Instant now = Instant.now();
 		long timestamp = Instant.now().toEpochMilli();
@@ -165,12 +159,6 @@ public class TransactionContainerTest {
 			throw new Error(ex);
 		} finally {
 			executor.shutdown();
-		}
-		
-		try {
-			Thread.sleep(2000); 
-		} catch (InterruptedException e) {
-			//Eat me
 		}
 		
 		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);

@@ -26,9 +26,9 @@ public class TransactionStatisticsServiceImpl implements TransactionStatisticsSe
 		
 		TransactionStatistics transactionStatistics = new TransactionStatistics();
 		
-		if (!transactionStatisticsCollator.isEmpty())
+		if (!transactionStatisticsCollator.isEmpty()) {
 			transactionStatisticsCollator.forEach(t -> t.mergeToResult(transactionStatistics));
-		else {
+		} else {
 			//Clear the MAX and MIN values to Zero
 			transactionStatistics.clear();
 		}

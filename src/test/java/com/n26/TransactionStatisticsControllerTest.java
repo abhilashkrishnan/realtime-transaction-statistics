@@ -45,7 +45,7 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 	}
 	
 	@Test
-	public void emptyStatistics() throws Exception {
+	public void getEmptyStatistics() throws Exception {
 		this.mockMvc.perform(get("/statistics").
 				accept(MediaType.APPLICATION_JSON)).
 				andExpect(status().isOk()).
@@ -54,7 +54,7 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 	}
 	
 	@Test
-	public void multipleTransactionStatistics() throws Exception {
+	public void getMultipleTransactions() throws Exception {
 		IntStream.range(0, 100).forEach(i -> {
 	        try {
 	        	Instant timestamp = Instant.now();
@@ -76,7 +76,7 @@ public class TransactionStatisticsControllerTest extends TransactionTest {
 	}
 	
 	@Test
-	public void statisticsNotEmpty() throws Exception {
+	public void getStatisticsNotEmpty() throws Exception {
 
 		Instant timestamp = Instant.now();
 		String json = createValidTransactionJson(DateTimeFormatter.ISO_INSTANT.format(timestamp));

@@ -79,12 +79,6 @@ public class TransactionStatisticsServiceTest {
 			executor.shutdown();
 		}
 		
-		try {
-			Thread.sleep(2000); 
-		} catch (InterruptedException e) {
-			//Eat me
-		}
-		
 		TransactionStatistics transactionStatistics = transactionStatisticsService.getTransactionStatistics();
 		assertNotNull(transactionStatistics);
 		

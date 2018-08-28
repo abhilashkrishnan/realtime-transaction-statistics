@@ -55,7 +55,7 @@ public class TransactionStatisticsCollatorTest {
 	
 	
 	@Test
-	public void merge() throws Exception {
+	public void mergeTransaction() throws Exception {
 		Instant now = Instant.now();
 		Transaction transaction = new Transaction();
 		transaction.setAmount(new BigDecimal(100.68));

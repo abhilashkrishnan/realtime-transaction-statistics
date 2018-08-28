@@ -81,12 +81,6 @@ public class TransactionServiceTest extends TransactionTest  {
 			executor.shutdown();
 		}
 		
-		try {
-			Thread.sleep(2000); 
-		} catch (InterruptedException e) {
-			//Eat me
-		}
-		
 		List<TransactionStatisticsCollator> collators = transactionContainer.getValidTransactionStatisticsCollators(timestamp);
 		
 		assertNotNull(collators);
@@ -115,12 +109,6 @@ public class TransactionServiceTest extends TransactionTest  {
 			throw new Error(ex);
 		} finally {
 			executor.shutdown();
-		}
-		
-		try {
-			Thread.sleep(2000); 
-		} catch (InterruptedException e) {
-			//Eat me
 		}
 		
 		transactionService.deleteTransactions();
